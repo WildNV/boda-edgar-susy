@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData(form);
 
         // URL proporcionada por el usuario (marcador de posición)
-        const URL_WEB_APP = "URL_WEB_APP_AQUI";
+        const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbwDeAzWuRD2ZgPULZuEoLaFtBr2C5xehBtpIBEM1vwYHluS8pJuUe6nmGpzflp7yphwPQ/exec";
 
         // UI Updates: Disable button, show loading
         const originalBtnText = submitBtn.textContent;
@@ -62,3 +62,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 });
+
