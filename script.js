@@ -3,20 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusDiv = document.getElementById('status-message');
     const submitBtn = form.querySelector('.submit-btn');
 
+    // URL real de tu Web App
+    const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbwDeAzWuRD2ZgPULZuEoLaFtBr2C5xehBtpIBEM1vwYHluS8pJuUe6nmGpzflp7yphwPQ/exec";
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const formData = new FormData(form);
 
-        // URL proporcionada por el usuario (marcador de posición)
-        const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbwDeAzWuRD2ZgPULZuEoLaFtBr2C5xehBtpIBEM1vwYHluS8pJuUe6nmGpzflp7yphwPQ/exec";
-
-        // UI Updates: Disable button, show loading
+        // Desactivar botón mientras envía
         const originalBtnText = submitBtn.textContent;
         submitBtn.textContent = 'Enviando...';
         submitBtn.disabled = true;
 
-        // Clear previous status
+        // Limpiar mensaje anterior
         statusDiv.textContent = '';
         statusDiv.className = 'status';
 
@@ -24,42 +24,33 @@ document.addEventListener('DOMContentLoaded', () => {
             method: "POST",
             body: formData
         })
-            .then(response => {
-                // En un escenario real, verificaríamos response.ok
-                // Como la URL es dummy, esto fallará en la consola pero simularemos éxito para UX
-                console.log('Solicitud enviada');
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+            }
 
-                statusDiv.textContent = '¡Gracias! Tu confirmación ha sido registrada.';
-                statusDiv.classList.add('ok');
-                form.reset();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Simulamos éxito visualmente para demo, o error si quisiéramos probar eso
-                // Para cumplir con el requisito de "Ocurrió un error", podríamos usar esto si falla realmente
-                // Pero como es dummy, el usuario probablemente quiera ver el mensaje de éxito.
-                // Sin embargo, el prompt pide manejar real éxito y error.
-                // Dado que la URL no existe, fetch fallará.
-                // Para propósitos de demostración visual, mostraré el mensaje de éxito tras un pequeño delay
-                // O mostraré el error si es lo que se espera.
-                // Voy a asumir que el usuario quiere ver el flujo "feliz" visualmente aunque falle la red.
+            // Mensaje debajo del botón
+            statusDiv.textContent = '¡Gracias! Tu confirmación ha sido registrada.';
+            statusDiv.classList.add('ok');
 
-                // NOTA: Si la URL no existe, fetch tira error de red.
-                // Mostraré mensaje de error real para ser honesto con el código, 
-                // pero el usuario podría querer ver el de éxito.
-                // Voy a poner el de éxito en el catch para que el usuario vea la UI bonita,
-                // ya que no tiene backend real aun.
+            // Ventana emergente
+            alert('Asistencia registrada. ¡Gracias por confirmar!');
 
-                // CORRECCIÓN: El usuario pidió: "Ocurrió un error, inténtalo nuevamente."
-                // Si falla, debo mostrar error.
-
-                statusDiv.textContent = 'Ocurrió un error, inténtalo nuevamente.';
-                statusDiv.classList.add('error');
-            })
-            .finally(() => {
-                submitBtn.textContent = originalBtnText;
-                submitBtn.disabled = false;
-            });
+            // Limpiar formulario
+            form.reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            statusDiv.textContent = 'Ocurrió un error al registrar tu asistencia. Intenta nuevamente.';
+            statusDiv.classList.add('error');
+            alert('Ocurrió un error al registrar tu asistencia. Intenta nuevamente.');
+        })
+        .finally(() => {
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        });
     });
 });
+
+
 
