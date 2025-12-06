@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda de Edgar & Susy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">Confirmación de nuestro matrimonio</h1>
+            <h2 class="couple-names">Edgar & Susy</h2>
+            <p class="event-details">20 de diciembre del 2025 – Iglesia San José<br>(Alt. de la cuadra 25 de la
+                putumayo)</p>
+        </header>
+
+        <section class="illustration-section">
+            <div class="image-frame">
+                <img src="wedding_illustration.png" alt="Ilustración de Edgar y Susy" class="wedding-image">
+            </div>
+        </section>
+
+        <main class="form-section">
+            <form id="wedding-form" class="wedding-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" name="apellidos" required placeholder="Tus apellidos">
+                </div>
+
+                <div class="form-group">
+                    <label>¿Asistirás?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="asistencia" value="si" required>
+                            <span>Sí, confirmo</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="asistencia" value="no">
+                            <span>No podré asistir</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="acompanantes">Indica cuantas personas asistirán al evento, incluyéndote <span
+                            class="label-note">(Toma en cuenta al numero de pase que se entrgo para ti)</span></label>
+                    <select id="acompanantes" name="acompanantes" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">Mensaje para los novios</label>
+                    <textarea id="mensaje" name="mensaje" rows="4"
+                        placeholder="Escribe un mensaje bonito..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Confirmar asistencia</button>
+                <div id="status-message" class="status"></div>
+            </form>
+        </main>
+
+        <footer class="footer">
+            <p>Esperamos verte ahí</p>
+        </footer>
+    </div>
+    <!-- Custom Popup -->
+    <div id="success-popup" class="popup-overlay">
+        <div class="popup-content">
+            <h3 class="popup-title">¡Asistencia registrada!</h3>
+            <p class="popup-message">Gracias por confirmar tu presencia. 💕</p>
+            <button id="close-popup-btn" class="popup-btn">Aceptar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
